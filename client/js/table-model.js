@@ -1,5 +1,5 @@
-class TableModels {
-	constructor(numCols=10,numRows=20) {
+class TableModel {
+	constructor(numCols=10, numRows=20) {
 		this.numCols = numCols;
 		this.numRows = numRows;
 		this.data = {};
@@ -14,4 +14,4 @@ class TableModels {
 		this.data[this._getCellId(location)] = value;
 	}
 }
-module.export = TableModels;
+module.exports = TableModel;
