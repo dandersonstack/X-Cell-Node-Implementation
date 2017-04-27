@@ -58,7 +58,6 @@ class TableView {
 	}
 
 	attachEventHandlers() {
-		console.log(this.sheetEl);
 		this.sheetBodyEl.addEventListener('click', 
 			this.handleSheetClick.bind(this));
 	}

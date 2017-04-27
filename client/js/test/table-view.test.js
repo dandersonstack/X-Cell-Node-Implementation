@@ -10,6 +10,26 @@ describe('table-view', () => {
 	});
 
 	describe('table body', () => {
+		it('highlights the current cell when clicked', () => {
+			//set up the inital state
+			const model = new TableModel(10,5);
+			const view = new TableView(model);
+			view.init()
+
+			//inspect the initial state
+			let trs = document.querySelectorAll('TBODY TR');
+			let td = trs[2].cells[3];
+			expect(td.className).toBe('');
+
+			//simulate user action
+			td.click();
+
+			//inspect the resulting state
+			trs = document.querySelectorAll('TBODY TR');
+			td = trs[2].cells[3];
+			expect(td.className).not.toBe('');
+		});
+
 		it('has the right size', () => {
 			//set up the inital state
 			const numCols = 6;
@@ -19,8 +39,8 @@ describe('table-view', () => {
 			view.init();
 
 			//inspect the initial state
-			let ths = document.querySelectorAll('THEAD TH');
-			expect(ths.length).toBe(numCols);
+			let trs = document.querySelectorAll('THEAD TH');
+			expect(trs.length).toBe(numCols);
 		});
 
 		it('fills in values from the model', () => {
@@ -36,19 +56,23 @@ describe('table-view', () => {
 
 		});
 	});
-	describe('table header', () => {
-		//set up initial state
-		const numCols = 6;
-		const numRows = 10;
-		const model = new TableModel(numCols, numRows);
-		const view = new TableView(model);
-		view.init();
 
-		//inspect the inital state
-		let ths = document.querySelectorAll('THEAD TH');
-		expect(ths.length).toBe(numCols);
+	describe('table-header', () => {
+		it('has valid column header labels', () => {
+			//set up initial state
+			const numCols = 6;
+			const numRows = 10;
+			const model = new TableModel(numCols, numRows);
+			const view = new TableView(model);
+			view.init()
 
-		let labelTexts = ths.map(el => el.textConten);
-		expect(labelTexts).toEqual(['A','B','C','D','E','F']);
+			//inspect the inital state
+			let ths = document.querySelectorAll('THEAD TH');
+			expect(ths.length).toBe(numCols);
+
+			let labelTexts = Array.from(ths).map(el => el.textContent);
+			expect(labelTexts).toEqual(['A','B','C','D','E','F']);
+		});
 	});
+
 });
