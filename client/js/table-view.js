@@ -72,6 +72,33 @@ class TableView {
 		}
 		removeChildren(this.sheetBodyEl);
 		this.sheetBodyEl.appendChild(fragment);
+		this.renderSumRow();
+	}
+
+	renderSumRow() {
+		const tr = createTR();
+		for(let col = 0; col < this.model.numCols; col++) {
+			const total = this.calculateColTotal(col);
+			const td = createTD(total);
+			td.className = 'sum-cell';
+			tr.appendChild(td);
+		}
+		this.sheetBodyEl.appendChild(tr);
+	}
+
+	calculateColTotal(col) {
+		let total = 0;
+		for(let row = 0; row < this.model.numRows; row++) {
+			const position = {col: col, row: row};
+			total += this.normalizeValueForSumming(this.model.getValue(position));
+		}
+		console.log(total);
+		return total;
+	}
+
+	normalizeValueForSumming(value) {
+		const intVal = parseInt(value);
+		return intVal || 0;
 	}
 
 	attachEventHandlers() {
