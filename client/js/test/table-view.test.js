@@ -9,6 +9,26 @@ describe('table-view', () => {
 		document.documentElement.innerHTML = html;
 	});
 
+	describe('formula bar', () => {
+		it('updates the value of the current cell', () => {
+			//set up the inital state
+			const model = new TableModel(10,5);
+			const view = new TableView(model);
+			model.setValue({col: 2, row: 1}, '123');
+			view.init();
+
+			//inspect the initial state
+			const fomulaBarEl = document.querySelector('#formula-bar');
+			expect(fomulaBarEl.value).toBe('');
+
+			//simulate user action
+			const trs = document.querySelectorAll('TBODY TR');
+			trs[1].cells[2].click();
+			//inspect the resulting state
+			expect(fomulaBarEl.value).toBe('123');
+		});
+	});
+
 	describe('table body', () => {
 		it('highlights the current cell when clicked', () => {
 			//set up the inital state
