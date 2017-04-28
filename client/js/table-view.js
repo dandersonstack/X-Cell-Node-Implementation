@@ -80,18 +80,12 @@ class TableView {
 		this.formulaBarEl.addEventListener('keyup', this.handleFormulaBarChange.bind(this));
 	}
 
-	isColumnHeaderRow(row) {
-		return row < 0;
-	}
 
 	handleSheetClick(evt){
 		const col = evt.target.cellIndex;
 		const row = evt.target.parentElement.rowIndex - 1;
-		if (!this.isColumnHeaderRow(row)) {
-			this.currentCellLocation = {col: col, row: row};
-			this.renderTableBody();
-		}
-
+		this.currentCellLocation = {col: col, row: row};
+		this.renderTableBody();
 		this.renderFomulaBar();
 	}
 }
