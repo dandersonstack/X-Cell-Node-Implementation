@@ -81,6 +81,10 @@ class TableView {
 			const total = this.calculateColTotal(col);
 			const td = createTD(total);
 			td.className = 'sum-cell';
+			//if the total is greater than zero, add that value to model
+			if(total > 0) {
+				this.model.setValue({col: col, row: this.model.numRows}, total);
+			}
 			tr.appendChild(td);
 		}
 		this.sheetBodyEl.appendChild(tr);
