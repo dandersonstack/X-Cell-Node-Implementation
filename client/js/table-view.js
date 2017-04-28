@@ -92,7 +92,6 @@ class TableView {
 			const position = {col: col, row: row};
 			total += this.normalizeValueForSumming(this.model.getValue(position));
 		}
-		console.log(total);
 		return total;
 	}
 
