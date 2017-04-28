@@ -9,6 +9,21 @@ describe('table-view', () => {
 		document.documentElement.innerHTML = html;
 	});
 
+	describe('SumRow', () => {
+		it('renders the sum row correctly as empty with a color', () => {
+
+		});
+		it('populates the sum of a col, when at least 1 value is set', () => {
+
+		});
+		it('ignores random non Integer Values', () => {
+
+		});
+		it('the elements in the sum row can not be selected', () => {
+
+		});
+	});
+
 	describe('formula bar', () => {
 		it('makes changes to the value of the current cell', () => {
 			//set up the inital state
