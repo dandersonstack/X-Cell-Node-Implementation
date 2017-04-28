@@ -10,17 +10,85 @@ describe('table-view', () => {
 	});
 
 	describe('SumRow', () => {
-		it('renders the sum row correctly as empty with a color', () => {
+		it('populates the sum row when one value is set', () => {
+			//set up the inital state
+			const model = new TableModel(3,3);
+			const view = new TableView(model);
+			view.init();
 
-		});
-		it('populates the sum of a col, when at least 1 value is set', () => {
+			//inspect the inital state
+			let trs = document.querySelectorAll('TBODY TR');
+			let td = trs[3].cells[0];
+			expect(td.textContent).toBe('');
 
+			//simulate user action
+			document.querySelector('#formula-bar').value = '65';
+			view.handleFormulaBarChange();
+
+			//inspect the resulting state
+			trs = document.querySelectorAll('TBODY TR');
+			expect(trs[3].cells[0].textContent).toBe('65');
 		});
+
+		it('happy path: calculates the sum when multiple values are set', () => {
+			//set up the inital state
+			const model = new TableModel(3,3);
+			const view = new TableView(model);
+			view.init();
+
+			//inspect the inital state
+			let trs = document.querySelectorAll('TBODY TR');
+			let td = trs[3].cells[0];
+			expect(td.textContent).toBe('');
+
+			//simulate user action
+			model.setValue({col: 0, row: 1}, '6');
+			model.setValue({col: 0, row: 2}, '5');
+			view.renderTable();
+
+			//inspect the resulting state
+			trs = document.querySelectorAll('TBODY TR');
+			expect(trs[3].cells[0].textContent).toBe('11');
+		});
+
 		it('ignores random non Integer Values', () => {
+			//set up the inital state
+			const model = new TableModel(3,3);
+			const view = new TableView(model);
+			view.init();
 
+			//inspect the inital state
+			let trs = document.querySelectorAll('TBODY TR');
+			let td = trs[3].cells[0];
+			expect(td.textContent).toBe('');
+
+			//simulate user action
+			model.setValue({col: 0, row: 1}, 'book');
+			view.renderTable();
+
+			//inspect the resulting state
+			trs = document.querySelectorAll('TBODY TR');
+			expect(trs[3].cells[0].textContent).toBe('');
 		});
-		it('the elements in the sum row can not be selected', () => {
 
+		it('the elements in the sum row can not be selected', () => {
+			//set up the inital state
+			const model = new TableModel(3,3);
+			const view = new TableView(model);
+			view.init()
+
+			//inspect the initial state
+			let trs = document.querySelectorAll('TBODY TR');
+			let td = trs[3].cells[0];
+			expect(td.className).toBe('sum-cell');
+
+			//simulate user action
+			td.click();
+
+			//inspect the resulting state
+			trs = document.querySelectorAll('TBODY TR');
+			td = trs[3].cells[0];
+			expect(td.className).toBe('sum-cell');
 		});
 	});
 
