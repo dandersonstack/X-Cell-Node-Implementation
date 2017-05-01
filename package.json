@@ -1,9 +1,6 @@
 {
   "name": "x-cell",
   "version": "1.0.0",
-  "engines": {
-    "node": "7.4.0"
-  },
   "description": "world's smallest spreadsheet",
   "main": "index.js",
   "scripts": {
