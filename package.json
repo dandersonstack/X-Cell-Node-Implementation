@@ -1,16 +1,15 @@
 {
   "name": "x-cell",
   "version": "1.0.0",
-  "description": "world's smallest spreadsheet",
+  "description": "wourld's smallest spreadsheet ",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "postinstall":"browserify client/app.js -o client/bundle.js",
     "build": "mkdir -p public/js; browserify client/js/app.js > public/js/bundle.js",
     "watch": "watchify client/js/app.js -o public/js/bundle.js",
+    "start": "node index.js",
     "test": "jest"
   },
-  "author": "Daniel Anderson",
+  "author": "",
   "license": "MIT",
   "dependencies": {
     "express": "^4.15.2"
