@@ -6,14 +6,14 @@
   "scripts": {
     "build": "mkdir -p public/js; browserify client/js/app.js > public/js/bundle.js",
     "watch": "watchify client/js/app.js -o public/js/bundle.js",
+    "postinstall":"browserify client/app.js -o client/bundle.js",
     "test": "jest",
     "start": "node index.js"
   },
   "author": "Daniel Anderson",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.15.2",
-    "postinstall-build": "^3.0.1"
+    "express": "^4.15.2"
   },
   "devDependencies": {
     "browserify": "^14.3.0",
