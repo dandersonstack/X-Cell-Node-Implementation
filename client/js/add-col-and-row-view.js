@@ -1,4 +1,4 @@
-class ButtonView {
+class AddColAndRowView {
   constructor(model, tableView) {
     this.model = model;
     this.view = tableView;
@@ -28,4 +28,4 @@ class ButtonView {
   }
 }
 
-module.exports = ButtonView;
+module.exports = AddColAndRowView;
