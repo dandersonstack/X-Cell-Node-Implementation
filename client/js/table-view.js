@@ -25,6 +25,7 @@ class TableView {
   normalizeValueForRendering(value) {
     return value || '';
   }
+
   renderFomulaBar() {
     const currentCellValue = this.model.getValue(this.currentCellLocation);
     this.formulaBarEl.value = this.normalizeValueForRendering(currentCellValue);
@@ -48,6 +49,9 @@ class TableView {
       .map(colLabel => createTH(colLabel))
       .forEach(th => this.headerRowEl.appendChild(th));
   }
+  isCurrentCol(col) {
+    return this.currentColLocation == col
+  }
 
   isCurrentCell(col,row) {
     return this.currentCellLocation.col == col &&
@@ -58,20 +62,27 @@ class TableView {
     const fragment = document.createDocumentFragment();
     for (let row = 0; row < this.model.numRows; row++) {
       const tr = createTR();
-      for(let col = 0; col < this.model.numCols; col++) {
+      //initialize the first column header
+      const td = createTD(row.toString());
+      tr.appendChild(td);
+      for(let col = 1; col < this.model.numCols; col++) {
         const position = {col: col, row: row};
         const value = this.model.getValue(position);
         const td = createTD(value);
         tr.appendChild(td);
-        if(this.isCurrentCell(col, row)) {
+        if(this.isCurrentCol(col)) {
+          td.className = 'current-col';
+        } else if (this.isCurrentCell(col, row)) {
           td.className = 'current-cell';
         }
+
       }
       fragment.appendChild(tr);
     }
     removeChildren(this.sheetBodyEl);
     this.sheetBodyEl.appendChild(fragment);
     this.renderSumRow();
+    this.renderRowNumbers
   }
 
   renderSumRow() {
@@ -123,13 +134,22 @@ class TableView {
     this.sheetBodyEl.addEventListener('click', 
       this.handleSheetClick.bind(this));
     this.formulaBarEl.addEventListener('keyup', this.handleFormulaBarChange.bind(this));
+    this.headerRowEl.addEventListener('click',this.handleHeaderClick.bind(this));
   }
 
+  handleHeaderClick(evt) {
+    const col = evt.target.cellIndex;
+    this.currentCellLocation = {col: -1, row: -1};
+    this.currentColLocation = col;
+    this.renderTableBody();
+    this.renderFomulaBar();
+  }
 
   handleSheetClick(evt){
     const col = evt.target.cellIndex;
     const row = evt.target.parentElement.rowIndex - 1;
     this.currentCellLocation = {col: col, row: row};
+    this.currentColLocation = undefined;
     this.renderTableBody();
     this.renderFomulaBar();
   }
