@@ -18,7 +18,7 @@ class TableView {
   }
 
   initCurrentCell() {
-    this.currentCellLocation = {col: 0, row: 0};
+    this.currentCellLocation = {col: 1, row: 0};
     this.renderFomulaBar();
   }
 
@@ -49,6 +49,10 @@ class TableView {
       .map(colLabel => createTH(colLabel))
       .forEach(th => this.headerRowEl.appendChild(th));
   }
+  isCurrentRow(row) {
+    return  this.currentCellLocation.col == 0 &&
+           this.currentCellLocation.row == row;
+  }
   isCurrentCol(col) {
     return this.currentColLocation == col
   }
@@ -72,6 +76,8 @@ class TableView {
         tr.appendChild(td);
         if(this.isCurrentCol(col)) {
           td.className = 'current-col';
+        } else if (this.isCurrentRow(row)){
+          td.className = 'current-row';
         } else if (this.isCurrentCell(col, row)) {
           td.className = 'current-cell';
         }
