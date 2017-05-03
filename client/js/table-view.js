@@ -63,7 +63,6 @@ class TableView {
         const value = this.model.getValue(position);
         const td = createTD(value);
         tr.appendChild(td);
-
         if(this.isCurrentCell(col, row)) {
           td.className = 'current-cell';
         }
@@ -79,7 +78,10 @@ class TableView {
     const tr = createTR();
     for(let col = 0; col < this.model.numCols; col++) {
       const total = this.calculateColTotal(col);
-      const td = createTD(total);
+      let td = createTD(total);
+      if(!this.doesColHaveAValue(col)) {
+        td = createTD();
+      }
       td.className = 'sum-cell';
       //if the total is greater than zero, add that value to model
       if(total > 0) {
@@ -88,6 +90,19 @@ class TableView {
       tr.appendChild(td);
     }
     this.sheetBodyEl.appendChild(tr);
+  }
+
+  doesColHaveAValue(col) {
+    for (let row = 0; row < this.model.numRows; row++) {
+      const position = {col: col, row: row};
+      if(this.isNumeric(this.model.getValue(position))) {
+        return true;
+      }
+    }
+  }
+
+  isNumeric(n) {
+    return !isNaN(parseFloat(n)) && isFinite(n);
   }
 
   calculateColTotal(col) {
