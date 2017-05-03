@@ -5,7 +5,7 @@ describe('dom-util', () => {
 
   describe('DOM creation functions', () => {
     describe('createTH', () => {
-      it('produce a vaild TH element', () => {
+      it('produces a vaild TH element', () => {
         const el = createTH();
         expect(el.tagName).toBe('TH');
       });
@@ -17,13 +17,13 @@ describe('dom-util', () => {
 
     });
     describe('createTR', () => {
-      it('produce a vaild TR element', () => {
+      it('produces a vaild TR element', () => {
         const el = createTR();
         expect(el.tagName).toBe('TR');
       });
     });
     describe('createTD', () => {
-      it('produce a vaild TD element', () => {
+      it('produces a vaild TD element', () => {
         const el = createTD();
         expect(el.tagName).toBe('TD');
       });

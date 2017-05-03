@@ -30,7 +30,7 @@ describe('table-view', () => {
       expect(trs[3].cells[0].textContent).toBe('65');
     });
 
-    it('happy path: calculates the sum when multiple values are set', () => {
+    it('calculates the sum correctly when multiple values are set', () => {
       //set up the inital state
       const model = new TableModel(3,3);
       const view = new TableView(model);
@@ -71,7 +71,7 @@ describe('table-view', () => {
       expect(trs[3].cells[0].textContent).toBe('');
     });
 
-    it('the elements in the sum row can not be selected', () => {
+    it('checks that the elements in the sum row can not be selected', () => {
       //set up the inital state
       const model = new TableModel(3,3);
       const view = new TableView(model);
