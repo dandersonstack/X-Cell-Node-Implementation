@@ -18,7 +18,7 @@ describe('table-view', () => {
 
       //inspect the inital state
       let trs = document.querySelectorAll('TBODY TR');
-      let td = trs[3].cells[0];
+      let td = trs[3].cells[1];
       expect(td.textContent).toBe('');
 
       //simulate user action
@@ -27,7 +27,7 @@ describe('table-view', () => {
 
       //inspect the resulting state
       trs = document.querySelectorAll('TBODY TR');
-      expect(trs[3].cells[0].textContent).toBe('65');
+      expect(trs[3].cells[1].textContent).toBe('65');
     });
 
     it('calculates the sum correctly when multiple values are set', () => {
@@ -101,16 +101,19 @@ describe('table-view', () => {
 
       //inspect the initial state
       let trs = document.querySelectorAll('TBODY TR');
-      let td = trs[0].cells[0];
+      let td = trs[1].cells[1];
       expect(td.textContent).toBe('');
 
+
       //simulate user action
+      td.click();
       document.querySelector('#formula-bar').value = '65';
+
       view.handleFormulaBarChange();
 
       //inspect the resulting state
       trs = document.querySelectorAll('TBODY TR');
-      expect(trs[0].cells[0].textContent).toBe('65');
+      expect(trs[1].cells[1].textContent).toBe('65');
     });
 
     it('updates the value of the current cell', () => {
