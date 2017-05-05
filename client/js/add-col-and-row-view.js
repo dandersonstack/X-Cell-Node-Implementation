@@ -28,7 +28,23 @@ class AddColAndRowView {
         delete this.model.data[key];
       }
     }
+    for(var key in this.model.data) {
+      if (parseInt(key[2]) === this.model.numRows) {
+        delete this.model.data[key];
+      }
+    }
+    //this block will make it so add row will move all the elemnts below the row down
+    // if(this.view.currentCellLocation['col'] == 0) {
+    //   const row = parseInt(this.view.currentCellLocation['row']);
+    //   for(var key in this.model.data) {
+    //     if (parseInt(key[2]) > row) {
+    //       //this.model.data[key][2] = parseInt(this.model.data[key][2]) + 1;
+    //     }
+    //   }
+    // }
     this.model.numRows += 1;
+    console.log(this.view.currentCellLocation['col']);
+
     this.view.renderTable();
   }
 }
