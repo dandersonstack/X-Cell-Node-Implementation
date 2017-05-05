@@ -62,33 +62,38 @@ class TableView {
            this.currentCellLocation.row == row
   }
 
+  setClassName(col, row, td) {
+    if(this.isCurrentCol(col)) {
+      td.className = 'current-col';
+    } else if (this.isCurrentRow(row)){
+      td.className = 'current-row';
+    } else if (this.isCurrentCell(col, row)) {
+      td.className = 'current-cell';
+    }
+  }
+  generateTDElem(col, row) {
+    const position = {col: col, row: row};
+    const value = this.model.getValue(position);
+    return createTD(value);
+  }
+
   renderTableBody(){
     const fragment = document.createDocumentFragment();
     for (let row = 0; row < this.model.numRows; row++) {
       const tr = createTR();
       //initialize the first column header
-      const td = createTD(row.toString());
+      let td = createTD(row.toString());
       tr.appendChild(td);
       for(let col = 1; col < this.model.numCols; col++) {
-        const position = {col: col, row: row};
-        const value = this.model.getValue(position);
-        const td = createTD(value);
+        td = this.generateTDElem(col, row);
         tr.appendChild(td);
-        if(this.isCurrentCol(col)) {
-          td.className = 'current-col';
-        } else if (this.isCurrentRow(row)){
-          td.className = 'current-row';
-        } else if (this.isCurrentCell(col, row)) {
-          td.className = 'current-cell';
-        }
-
+        this.setClassName(col, row, td);
       }
       fragment.appendChild(tr);
     }
     removeChildren(this.sheetBodyEl);
     this.sheetBodyEl.appendChild(fragment);
     this.renderSumRow();
-    this.renderRowNumbers
   }
 
   renderSumRow() {
