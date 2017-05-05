@@ -11,6 +11,12 @@ th, td {
 .current-cell {
 	background-color: pink;
 }
+.current-col {
+  background-color: blue;
+}
+.current-row {
+  background-color: green;
+}
 .sum-cell {
 	background-color: chartreuse;
 }
