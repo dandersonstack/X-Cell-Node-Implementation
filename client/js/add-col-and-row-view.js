@@ -1,4 +1,5 @@
 class AddColAndRowView {
+
   constructor(model, tableView) {
     this.model = model;
     this.view = tableView;
@@ -21,6 +22,7 @@ class AddColAndRowView {
     this.model.numCols += 1;
     this.view.renderTable();
   }
+
   addRow(event){
     event.preventDefault();
     for(var key in this.model.data) {
@@ -39,6 +41,7 @@ class AddColAndRowView {
     //this.incrementRow;
     this.view.renderTable();
   }
+  
   incrementRow() {
     //this block will make it so add row will move all the elemnts below the row down
     // if(this.view.currentCellLocation['col'] == 0) {

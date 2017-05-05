@@ -2,15 +2,18 @@ const { getLetterRange } = require('./array-util');
 const { removeChildren, createTH, createTR, createTD } = require('./dom-util');
 
 class TableView {
+  
   constructor(model) {
     this.model = model;
   }
+
   init() {
     this.initDomReferences();
     this.initCurrentCell();
     this.renderTable();
     this.attachEventHandlers();
   }
+
   initDomReferences() {
     this.headerRowEl = document.querySelector('THEAD TR');
     this.sheetBodyEl = document.querySelector('TBODY');
@@ -37,10 +40,12 @@ class TableView {
     this.model.setValue(this.currentCellLocation, value);
     this.renderTableBody();
   }
+
   renderTable() {
     this.renderTableHeader();
     this.renderTableBody();
   }
+
   renderTableHeader() {
     //clear header row
     removeChildren(this.headerRowEl);
@@ -49,10 +54,12 @@ class TableView {
       .map(colLabel => createTH(colLabel))
       .forEach(th => this.headerRowEl.appendChild(th));
   }
+
   isCurrentRow(row) {
     return  this.currentCellLocation.col == 0 &&
            this.currentCellLocation.row == row;
   }
+
   isCurrentCol(col) {
     return this.currentColLocation == col
   }
@@ -71,6 +78,7 @@ class TableView {
       td.className = 'current-cell';
     }
   }
+
   generateTDElem(col, row) {
     const position = {col: col, row: row};
     const value = this.model.getValue(position);

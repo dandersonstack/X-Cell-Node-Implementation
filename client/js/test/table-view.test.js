@@ -3,6 +3,7 @@ const TableModel = require ('../table-model');
 const TableView = require('../table-view');
 
 describe('table-view', () => {
+  
   beforeEach(() => {
     const fixturePath = './client/js/test/fixtures/sheet-container.html';
     const html = fs.readFileSync(fixturePath, 'utf8');
