@@ -33,6 +33,13 @@ class AddColAndRowView {
         delete this.model.data[key];
       }
     }
+    this.model.numRows += 1;
+    console.log(this.view.currentCellLocation['col']);
+    //implement incrementing the correct row here
+    //this.incrementRow;
+    this.view.renderTable();
+  }
+  incrementRow() {
     //this block will make it so add row will move all the elemnts below the row down
     // if(this.view.currentCellLocation['col'] == 0) {
     //   const row = parseInt(this.view.currentCellLocation['row']);
@@ -42,10 +49,6 @@ class AddColAndRowView {
     //     }
     //   }
     // }
-    this.model.numRows += 1;
-    console.log(this.view.currentCellLocation['col']);
-
-    this.view.renderTable();
   }
 }
 
